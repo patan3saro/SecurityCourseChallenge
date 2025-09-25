@@ -1,3 +1,23 @@
+
+**Disclaimer:** This repository is provided for educational purposes only. Use it exclusively on data you own or on systems where you have explicit authorization. Unauthorized use is illegal. The author assumes no responsibility for misuse.
+
+## Legal Disclaimer
+
+This repository and its code are intended **solely for educational and demonstration purposes**, as part of an information security course challenge. The materials provided here must only be used:
+
+- on data and systems fully owned by the user, **or**
+- on systems where the user has received **explicit, written authorization** to run such tests.
+
+Any other use, including but not limited to attempts to access, test, or compromise third-party accounts, systems, or data without permission, is strictly prohibited and may constitute a violation of criminal and civil law.
+
+The author and contributors of this repository **accept no liability** for damages, legal consequences, or misuse arising from unauthorized or unethical use of the code. Responsibility for any misuse rests entirely with the end user.
+
+If this project is used in the context of a course or challenge, users should keep documentation of authorization from the instructor or institution (e.g., e-mail approval, written instructions).
+
+**This disclaimer does not constitute legal advice.** For binding information or legal compliance in your jurisdiction, consult a qualified lawyer.
+
+
+
 # Security Challenge
 
 A challenge from a computer security course: several controlled attempts to decipher a ciphertext using DES and candidate-key strategies (dictionary, heuristics, etc.). This repository is an **educational demo** intended for portfolio / interview purposes and for authorized lab exercises only. It demonstrates methodology, reproducibility and safe experimentation — **not** tools for unauthorized access.
