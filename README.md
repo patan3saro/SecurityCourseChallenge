@@ -1,128 +1,75 @@
+# DES Key Recovery — Controlled Demo
 
-**Disclaimer:** This repository is provided for educational purposes only. Use it exclusively on data you own or on systems where you have explicit authorization. Unauthorized use is illegal. The author assumes no responsibility for misuse.
+> **Educational & ethical use only.** This repository demonstrates, in a **controlled and authorized** setting, how to validate candidate keys against a DES-encrypted ciphertext. It is a didactic artifact for a computer security course / portfolio.
 
-## Legal Disclaimer
+## ⚖️ Legal Disclaimer
 
-This repository and its code are intended **solely for educational and demonstration purposes**, as part of an information security course challenge. The materials provided here must only be used:
+This repository and its code are intended **solely for educational and demonstration purposes**. Use them **only**:
+- on data/systems you fully own, or
+- on systems where you have **explicit, written authorization**.
 
-- on data and systems fully owned by the user, **or**
-- on systems where the user has received **explicit, written authorization** to run such tests.
-
-Any other use, including but not limited to attempts to access, test, or compromise third-party accounts, systems, or data without permission, is strictly prohibited and may constitute a violation of criminal and civil law.
-
-The author and contributors of this repository **accept no liability** for damages, legal consequences, or misuse arising from unauthorized or unethical use of the code. Responsibility for any misuse rests entirely with the end user.
-
-If this project is used in the context of a course or challenge, users should keep documentation of authorization from the instructor or institution (e.g., e-mail approval, written instructions).
-
-**This disclaimer does not constitute legal advice.** For binding information or legal compliance in your jurisdiction, consult a qualified lawyer.
-
-
-
-# Security Challenge (des-key-recovery-demo)
-
-A challenge from a computer security course: several controlled attempts to decipher a ciphertext using DES and candidate-key strategies (dictionary, heuristics, etc.). This repository is an **educational demo** intended for portfolio / interview purposes and for authorized lab exercises only. It demonstrates methodology, reproducibility and safe experimentation — **not** tools for unauthorized access.
+Any other use (including attempts to access, test, or compromise third-party systems or data) may violate criminal/civil law. The author and contributors accept **no liability** for misuse. This is **not** legal advice; consult a qualified lawyer for your jurisdiction.
 
 ---
 
-## Key facts 
-- **Cipher algorithm:** DES (single DES, 8-byte key).  
-- **Ciphertext (Base64):** `dpi4c+NIZxM=`  
-- **Plaintext:** a single Italian word of **length 8** (for the demo: `patatine`).  
-- **Key:** exactly **8 characters** (for the demo: `mmalgeri`).  
-- The demo shows how a candidate list and linguistic heuristics reduce the effective search space (controlled experiment).
+## 🧭 What this project shows
 
-> ⚠️ IMPORTANT: Use this repository only on local test data or on targets for which you have explicit written authorization.
+- A **safe demo** of candidate-based key checking for DES (single DES, 8-byte key).
+- Reproducible, minimal Python code to:
+  - decode a Base64 ciphertext,
+  - try a **small, pre-defined** set of candidate keys (no blind brute-force),
+  - verify a plausible plaintext under strict, ethical constraints.
 
----
+**Key facts (demo context)**  
+- Cipher algorithm: **DES** (8-byte key).  
+- Ciphertext (Base64): `dpi4c+NIZxM=`  
+- Plaintext: an 8-character Italian word (didactic assumption).  
+- Scope: **candidate-list validation** only, not exhaustive search.
 
-## Overview
-This repository contains:
-- a safe demonstration script that tests **only** keys provided in a candidate list (`candidates.txt`),
-- instructions for a one-click run (`run_demo.sh`),
-- minimal Docker support for reproducible execution,
-- documentation of the experimental methodology and ethical constraints.
-
-This challenge is framed as a classroom exercise: the goal is to show how to reason about keyspace, apply filtering strategies (e.g., language patterns), and verify candidates against a known test vector — all while following ethical constraints.
+> The intent is to show *methodology* (reasoning about keyspace, linguistic/structural hints, safe verification), not to provide offensive tooling.
 
 ---
 
-## Quick summary for interviewers (one-minute)
-- Purpose: show methodology for reducing keyspace and validating candidate keys against the DES-encrypted Base64 ciphertext `dpi4c+NIZxM=`.
-- Demo plaintext (test): `patatine` (8 characters).
-- Demo key (test): `mmalgeri` (8 characters).
-- Safety: the script reads `candidates.txt` and tries only listed keys; it does **not** enumerate the entire 8-character space.
-- One-click run: `./run_demo.sh`.
+## 📂 Repository structure
 
----
+.
+├─ demo_safe_decrypt.py # safe demo script (single-file, minimal deps)
+└─ old_attempts/ # older/experimental attempts (historical context)
 
-## Files in this repo
-- `README.md` — this file.
-- `demo_safe_decrypt.py` — safe demo script (tries only candidates from `candidates.txt`).
-- `candidates.txt` — example candidate list (one key per line). Contains `mmalgeri` for the demo.
-- `run_demo.sh` — one-click runner (creates venv, installs minimal deps, runs demo).
-- `Dockerfile` — optional, minimal container for reproducible run.
-- `AUTHORIZATION.md` — template/guidance for authorization (do not publish sensitive proof).
-- `LICENSE` — choose and add a license (MIT recommended for examples).
+## ▶️ Quickstart (local run)
 
----
+**Prerequisites:** Python 3.10+.
 
-## Skills demonstrated
-- Advanced Python scripting (argparse, file I/O, exception handling).
-- Applied cryptography fundamentals (DES key size, padding, Base64 handling, `pyDes` usage).
-- Experimental research methodology (candidate filtering, controlled verification, reproducibility).
-- Reproducible engineering (virtualenv, `run_demo.sh`, Docker).
-- Performance & concurrency concepts (theory of `concurrent.futures` / threading and ethical tradeoffs).
-- Documentation & ethics: how to document scope, limitations and authorization.
-
----
-
-## One-click run for interviewers (local)
-**Prerequisites:** Python 3.10+ and `git`.
-
-1. Clone and enter repo:
 ```bash
-git clone <repo-url>
-cd <repo>
+# 1) Clone
+git clone https://github.com/patan3saro/des-key-recovery-demo.git
+cd des-key-recovery-demo
+
+# 2) (Optional but recommended) create a virtual environment
+python3 -m venv .venv && source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
+
+# 3) Install minimal dependency
+python -m pip install --upgrade pip
+python -m pip install pyDes
+
+# 4) Run the demo
+python demo_safe_decrypt.py
 
 
-2. Make runner executable and run
+** 🧪 Reproducibility & safety notes**
 
-chmod +x run_demo.sh
-./run_demo.sh
+No mass brute forcing. The script is intentionally constrained to a limited candidate set for classroom use.
 
-#What run_demo.sh does
+Deterministic behavior. Same inputs ⇒ same output.
 
-creates a Python virtual environment (.venv_demo),
-
-installs pyDes (minimal dependency),
-
-runs demo_safe_decrypt.py --candidates candidates.txt.
-
-#Expected sample output
-[INFO] Trying candidate key: mmalgeri
-[FOUND] key='mmalgeri' -> plaintext: 'patatine'
-[RESULT] Demo finished. For educational purposes only.
-
-# Quick run for interviewers (Docker)
-
-docker build -t challenge-demo .
-docker run --rm challenge-demo
-
-
-## Conducted Inquiry
-After an authorized and methodical analysis of the hints and patterns provided with the course challenge, I reduced the unconstrained 8-character search space to a small, meaningful candidate set by applying linguistic heuristics and iterative pruning. In this controlled demo the test plaintext patatine (8 characters) was recovered using the candidate key mmalgeri (8 characters). This result is included solely for reproducibility and educational purposes.
-
-Keywords
-
-SecurityCourseChallenge, cryptanalysis, ethical-security, reproducible-research, DES, pyDes, base64, python, virtualenv, docker, candidate-filtering, italian-words
-
-##Ethics & legal notice (must read)
-
-This repository is for educational/demo purposes only.
-
-Do not use these scripts on systems you do not own or for which you do not have explicit, written authorization.
-
-If you conduct real security tests, keep authorization documents out of public repos; include only a short summary in AUTHORIZATION.md.
+Clear boundaries. The code refuses to run in “unbounded” modes; edits are on you and at your responsibility.
 
 
 
+**🧱 Limitations (by design)**
+
+Not an all-purpose cracking tool; no exhaustive search.
+
+No GPU/parallel rigs; concurrency, if any, is limited and kept didactic.
+
+Assumes a short, curated candidate list derived from authorized hints.
