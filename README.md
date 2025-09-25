@@ -4,7 +4,7 @@ A challenge from a computer security course: several controlled attempts to deci
 
 ---
 
-## Key facts (integrated)
+## Key facts 
 - **Cipher algorithm:** DES (single DES, 8-byte key).  
 - **Ciphertext (Base64):** `dpi4c+NIZxM=`  
 - **Plaintext:** a single Italian word of **length 8** (for the demo: `patatine`).  
