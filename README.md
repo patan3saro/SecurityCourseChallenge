@@ -18,7 +18,7 @@ If this project is used in the context of a course or challenge, users should ke
 
 
 
-# Security Challenge
+# Security Challenge (des-key-recovery-demo)
 
 A challenge from a computer security course: several controlled attempts to decipher a ciphertext using DES and candidate-key strategies (dictionary, heuristics, etc.). This repository is an **educational demo** intended for portfolio / interview purposes and for authorized lab exercises only. It demonstrates methodology, reproducibility and safe experimentation — **not** tools for unauthorized access.
 
